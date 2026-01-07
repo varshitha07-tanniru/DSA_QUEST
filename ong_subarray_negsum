@@ -1,0 +1,32 @@
+package arrays;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class long_subarray_negsum {
+
+	public static void main(String[] args) {
+		
+		Map<Integer, Integer> preSumMap = new HashMap<>();
+		int[] nums= {-3,2,1};
+		int i,sum=0,maxlen=0,len,k=15;
+		for(i=0;i<nums.length;i++)
+		{
+			sum+=nums[i];
+			if(sum==k)
+			{
+				maxlen=Math.max(maxlen,i+1);
+			}
+			int rem=sum-k;
+			if(preSumMap.containsKey(rem))
+			{
+				maxlen=Math.max(maxlen,i-preSumMap.get(rem));
+			}
+			if (!preSumMap.containsKey(sum)) {
+                preSumMap.put(sum, i);
+            }
+		}
+		System.out.println(maxlen);
+	}
+
+}
